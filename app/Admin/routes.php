@@ -11,5 +11,10 @@ Route::group([
 ], function (Router $router) {
 
     $router->get('/', 'HomeController@index')->name('admin.home');
+    $router->resource('templates', TemplatesController::class);
+    $router->resource('activities', ActivitiesController::class);
+    $router->resource('awards', AwardsController::class);
+    $router->resource('certificates', CertificatesController::class);
+    $router->resource('users', UsersController::class);
 
 });
