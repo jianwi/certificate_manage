@@ -99,8 +99,8 @@ class ActivitiesController extends AdminController
 
         $form = new Form(new Activity());
 
-        $form->text('name', '活动名称')->creationRules(['required', "unique:activities"])
-            ->updateRules(['required', "unique:activities,name,{{id}}"]);;
+        $form->text('name', '活动名称')
+            ->rules(['required', "unique:activities"]);
 
         $form->textarea('content', '活动内容')->required();
         $form->display('user_id', '用户名')->with(function ($value) {
@@ -114,7 +114,7 @@ class ActivitiesController extends AdminController
         $form->hasMany('awards','奖项', function (Form\NestedForm $form){
             $form->text('name','奖项名称');
             $form->textarea('content','奖项描述');
-        })->rules('required');;
+        })->rules('required');
 
         $form->submitted(function (Form $form){
             $form->user_id = \Encore\Admin\Facades\Admin::user()->id;
