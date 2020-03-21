@@ -19,7 +19,8 @@ class CreateAwardsTable extends Migration
             $table->text('content');
             $table->foreignId('activity_id')->constrained('activities')->onDelete('cascade');
             $table->timestamps();
-            $table->boolean('isDelete')->default(false);
+            $table->softDeletes(0);
+
 
             $table->index('created_at');
 

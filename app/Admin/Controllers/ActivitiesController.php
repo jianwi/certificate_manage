@@ -100,7 +100,7 @@ class ActivitiesController extends AdminController
         $form = new Form(new Activity());
 
         $form->text('name', '活动名称')
-            ->rules(['required', "unique:activities"]);
+            ->creationRules(['required', "unique:activities"]);
 
         $form->textarea('content', '活动内容')->required();
         $form->display('user_id', '用户名')->with(function ($value) {

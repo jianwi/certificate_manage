@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\Activity;
 use App\Models\Award;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -73,5 +74,10 @@ class AwardsController extends AdminController
         $form->switch('isDelete', __('IsDelete'));
 
         return $form;
+    }
+
+    public function awards(Activity $activity){
+            return \DB::table('awards')->pluck('name','id')
+                ->where('activity_id' ,'=',$activity->id);
     }
 }

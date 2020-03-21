@@ -19,16 +19,17 @@ class CreateCertificatesTable extends Migration
             $table->foreignId('activity_id')->constrained('activities')->onDelete('cascade');
             $table->foreignId('award_id');
             $table->string('name')->index();
-            $table->string('text1');
-            $table->string('text2');
-            $table->string('text3');
-            $table->string('text4');
-            $table->string('text5');
-            $table->string('text6');
-            $table->string('text7');
-            $table->string('text8');
+            $table->string('text1')->nullable();
+            $table->string('text2')->nullable();
+            $table->string('text3')->nullable();
+            $table->string('text4')->nullable();
+            $table->string('text5')->nullable();
+            $table->string('text6')->nullable();
+            $table->string('text7')->nullable();
+            $table->string('text8')->nullable();
             $table->timestamps();
-            $table->boolean('isDelete')->default(false);
+            $table->softDeletes(0);
+
         });
     }
 

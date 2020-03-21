@@ -20,8 +20,9 @@ class CreateTemplatesTable extends Migration
             $table->foreignId('user_id');
             $table->timestamps();
             $table->boolean('isDelete')->default(false);
-
             $table->index('created_at');
+            $table->softDeletes(0);
+
         });
     }
 

@@ -20,7 +20,8 @@ class CreateActivitiesTable extends Migration
             $table->foreignId('user_id');
             $table->foreignId('template_id');
             $table->timestamps();
-            $table->boolean('isDelete')->default(false);
+            $table->softDeletes(0);
+
 
             $table->index('created_at');
         });
