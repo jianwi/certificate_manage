@@ -15,7 +15,7 @@ class CreateAwardsTable extends Migration
     {
         Schema::create('awards', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name');
             $table->text('content');
             $table->foreignId('activity_id')->constrained('activities')->onDelete('cascade');
             $table->timestamps();
