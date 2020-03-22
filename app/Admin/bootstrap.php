@@ -19,3 +19,5 @@
  */
 
 Encore\Admin\Form::forget(['map', 'editor']);
+
+\Encore\Admin\Show::extend('certificate_preview',\App\Admin\Exceptions\Show\CertificatePreview::class);

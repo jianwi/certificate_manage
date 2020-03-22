@@ -17,6 +17,7 @@ class CreateTemplatesTable extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->text('content');
+            $table->string('image')->nullable();
             $table->foreignId('user_id');
             $table->timestamps();
             $table->softDeletes(0);

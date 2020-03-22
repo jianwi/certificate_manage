@@ -17,5 +17,7 @@ Route::group([
     $router->resource('certificates', CertificatesController::class);
     $router->resource('users', UsersController::class);
 
-    $router->get('certificates/api/awards','Api\Awards@awards');
+    $router->get('api/awards','Api\Awards@awards');
+    $router->get('api/templates','Api\Templates@templates');
+
 });

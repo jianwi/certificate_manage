@@ -30,6 +30,7 @@ class ActivitiesController extends AdminController
     {
         $grid = new Grid(new Activity());
 
+
         $grid->filter(function($filter){
             $filter->disableIdFilter();
             $filter->contains('name','名称');
@@ -37,7 +38,7 @@ class ActivitiesController extends AdminController
         });
 
         $grid->column('id', __('Id'));
-        $grid->column('name', '名称');
+        $grid->column('name', '名称')->editable();
         $grid->column('user_id', '用户')->display(function ($user_id) {
             return User::find($user_id)->name;
         });
@@ -70,10 +71,17 @@ class ActivitiesController extends AdminController
             return Template::find($template_id)->name;
         });
 
-        $show->award('获奖信息',function ($award){
+        $show->awards('获奖信息',function ($award){
             $award->resource('/admin/awards');
-            $award->name();
-            $award->content();
+
+            $award->disableExport();
+            $award->disableFilter();
+            $award->disableColumnSelector();
+            $award->disableCreateButton();
+
+            $award->name()->editable();
+            $award->content()->limit(10);
+
         });
 
         $show->field('created_at', __('Created at'));
@@ -103,13 +111,18 @@ class ActivitiesController extends AdminController
             ->creationRules(['required', "unique:activities"]);
 
         $form->textarea('content', '活动内容')->required();
-        $form->display('user_id', '用户名')->with(function ($value) {
+        $form->display('user_id', '创建者')->with(function ($value) {
             return \Encore\Admin\Facades\Admin::user()->name;
         });
 
-        $form->select('template_id', __('模板'))->options(function (){
-          return \DB::table('templates')->pluck('name','id');
-        })->required();
+        $form->select('template_id', __('模板'))->options(function ($id){
+            $template = Template::find($id);
+
+            if ($template) {
+                return [$template->id => $template->name];
+            }
+        })->ajax('/admin/api/templates')
+            ->required();
 
         $form->hasMany('awards','奖项', function (Form\NestedForm $form){
             $form->text('name','奖项名称');

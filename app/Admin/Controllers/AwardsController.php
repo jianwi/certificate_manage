@@ -16,7 +16,7 @@ class AwardsController extends AdminController
      *
      * @var string
      */
-    protected $title = 'App\Models\Award';
+    protected $title = '活动奖励';
 
     /**
      * Make a grid builder.
@@ -30,10 +30,11 @@ class AwardsController extends AdminController
         $grid->column('id', __('Id'));
         $grid->column('name', __('Name'));
         $grid->column('content', __('Content'));
-        $grid->column('activity_id', __('Activity id'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
-        $grid->column('isDelete', __('IsDelete'));
+        $grid->column('activity_id', __('Activity id'))->display(function ($activity){
+            return Activity::find($activity)->name;
+        });
+        $grid->column('created_at', __('Created at'))->date('Y-m-d H:i:s');
+        $grid->column('updated_at', __('Updated at'))->date('Y-m-d H:i:s');
 
         return $grid;
     }
@@ -48,13 +49,18 @@ class AwardsController extends AdminController
     {
         $show = new Show(Award::findOrFail($id));
 
+        $show->panel()
+            ->tools(function ($tools) {
+                $tools->disableList();
+            });
         $show->field('id', __('Id'));
         $show->field('name', __('Name'));
         $show->field('content', __('Content'));
-        $show->field('activity_id', __('Activity id'));
-        $show->field('created_at', __('Created at'));
-        $show->field('updated_at', __('Updated at'));
-        $show->field('isDelete', __('IsDelete'));
+        $show->field('activity_id', __('Activity id'))->as(function ($activity){
+            return Activity::find($activity)->name;
+        });
+        $show->field('created_at', __('Created at'))->date('Y-m-d H:i:s');
+        $show->field('updated_at', __('Updated at'))->date('Y-m-d H:i:s');
 
         return $show;
     }
@@ -66,18 +72,19 @@ class AwardsController extends AdminController
      */
     protected function form()
     {
+
         $form = new Form(new Award());
 
+        $form->tools(function (Form\Tools $tools){
+            $tools->disableList();
+        });
         $form->text('name', __('Name'));
         $form->textarea('content', __('Content'));
-        $form->number('activity_id', __('Activity id'));
-        $form->switch('isDelete', __('IsDelete'));
+
+        $form->disableViewCheck();
+        $form->disableEditingCheck();
+        $form->disableCreatingCheck();
 
         return $form;
-    }
-
-    public function awards(Activity $activity){
-            return \DB::table('awards')->pluck('name','id')
-                ->where('activity_id' ,'=',$activity->id);
     }
 }

@@ -1,4 +1,13 @@
 {
+    "ID": "ID",
+    "Created at":"创建时间",
+    "Updated at":"更新时间",
+    "User id": "创建者",
+    "name":"名字",
+    "email":"邮箱",
+    "Content": "内容",
+    "Activity id": "活动名称",
+    "created_at": "创建时间",
     "A fresh verification link has been sent to your email address.": "新的验证链接已发送到您的 E-mail。",
     "All rights reserved.": "版本所有。",
     "Before proceeding, please check your email for a verification link.": "在继续之前请先验证您的 E-mail。",
