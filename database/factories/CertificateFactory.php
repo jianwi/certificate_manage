@@ -3,6 +3,7 @@
 $factory->define(\App\Models\Certificate::class,function (Faker\Generator $faker){
     $activity_ids = \App\Models\Activity::all()->pluck('id')->toArray();
     $award_ids = \App\Models\Award::all()->pluck('id')->toArray();
+    $user_ids = \App\Models\User::all()->pluck('id')->toArray();
 
     return [
         'name' => $faker->name,
@@ -12,6 +13,7 @@ $factory->define(\App\Models\Certificate::class,function (Faker\Generator $faker
         'text1' => 'text1',
         'text2' => 'text2',
         'text3' => 'text3',
+        'creator' => $faker->randomElement($user_ids),
         'created_at' => $faker->date.' '.$faker->time,
         'updated_at' => $faker->date.' '.$faker->time,
     ];

@@ -4,6 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Models\Activity;
 use App\Models\Award;
+use Encore\Admin\Auth\Permission;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -27,12 +28,12 @@ class AwardsController extends AdminController
     {
         $grid = new Grid(new Award());
 
+        Permission::check('activities_manage');
+
         $grid->column('id', __('Id'));
-        $grid->column('name', __('Name'));
-        $grid->column('content', __('Content'));
-        $grid->column('activity_id', __('Activity id'))->display(function ($activity){
-            return Activity::find($activity)->name;
-        });
+        $grid->column('name', __('名称'));
+        $grid->column('content', __('Content'))->limit(30);
+        $grid->column('activity.name', __('Activity id'));
         $grid->column('created_at', __('Created at'))->date('Y-m-d H:i:s');
         $grid->column('updated_at', __('Updated at'))->date('Y-m-d H:i:s');
 

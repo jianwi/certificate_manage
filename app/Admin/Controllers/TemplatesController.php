@@ -4,10 +4,13 @@ namespace App\Admin\Controllers;
 
 use App\Models\Template;
 use App\Models\User;
+use Encore\Admin\Auth\Permission;
 use Encore\Admin\Controllers\AdminController;
+use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class TemplatesController extends AdminController
 {
@@ -27,11 +30,13 @@ class TemplatesController extends AdminController
     {
         $grid = new Grid(new Template());
 
+        if (!\Encore\Admin\Facades\Admin::user()->can('templates_manage')){
+            $grid->model()->where('user_id', \Encore\Admin\Facades\Admin::user()->id);
+        }
+
         $grid->column('id', __('Id'));
         $grid->column('name', __('名称'))->editable();
-        $grid->column('user_id', __('User id'))->display(function ($user){
-            return User::find($user)->name;
-        });
+        $grid->column('user.name', __('User id'));
         $grid->column('created_at', __('Created at'))->date("Y-m-d H:i:s");
         $grid->column('updated_at', __('Updated at'))->date("Y-m-d H:i:s");;
 
@@ -72,11 +77,10 @@ class TemplatesController extends AdminController
 
         $form->text('name', __('Name'));
         $form->textarea('content', __('Content'));
-        $form->display('user_id', '用户名')->with(function ($value) {
-            return \Encore\Admin\Facades\Admin::user()->name;
-        });
+
         $form->image('image','证书缩略图')->uniqueName();
 
+        // 表单提交后,保存前事件
         $form->submitted(function (Form $form){
             $form->user_id = \Encore\Admin\Facades\Admin::user()->id;
         });

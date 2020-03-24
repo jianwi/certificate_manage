@@ -5,12 +5,11 @@ namespace App\Admin\Controllers;
 use App\Models\Activity;
 use App\Models\Award;
 use App\Models\Certificate;
+use App\Models\User;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
-use Psy\Util\Str;
-use function foo\func;
 
 class CertificatesController extends AdminController
 {
@@ -30,6 +29,10 @@ class CertificatesController extends AdminController
     {
         $grid = new Grid(new Certificate());
 
+        if (!\Encore\Admin\Facades\Admin::user()->can('certificates_manage')){
+            $grid->model()->where('creator', \Encore\Admin\Facades\Admin::user()->id);
+        }
+
         $grid->filter(function ($filter) {
             $filter->disableIdFilter();
 
@@ -41,18 +44,12 @@ class CertificatesController extends AdminController
         $grid->quickSearch('name', 'code');
 
         $grid->column('id', __('Id'));
+        $grid->column('name', __('获奖者'))->limit(15);
         $grid->column('code', __('证书代码'));
-        $grid->column('activity_id', __('活动名称'))->display(function ($activity) {
-            return Activity::find($activity)->name;
-        });
-        $grid->column('award_id', __('奖品名称'))->display(function ($award) {
-            return Award::find($award)->name;
-        });
-        $grid->column('name', __('获奖者'));
-
+//        $grid->column('creator','创建者');
+        $grid->column('activity.name', __('活动名称'));
+        $grid->column('award.name', __('奖品名称'));
         $grid->column('created_at', __('Created at'))->date('Y-m-d H:i:s');
-        $grid->column('updated_at', __('Updated at'))->date('Y-m-d H:i:s');
-//        $grid->column('isDelete', __('IsDelete'));
 
         return $grid;
     }
@@ -72,7 +69,9 @@ class CertificatesController extends AdminController
         $show->field('activity_id', __('活动名称'))->as(function ($activity) {
             return Activity::find($activity)->name;
         });
-
+        $show->creator('创建者')->as(function ($creator){
+            return User::find($creator)->name;
+        });
         $show->field('award_id', __('奖励名称'))->as(function ($award) {
             return Award::find($award)->name;
         });

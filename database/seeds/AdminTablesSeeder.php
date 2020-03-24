@@ -35,6 +35,11 @@ class AdminTablesSeeder extends Seeder
                 'username' => 'developer',
                 'password' => bcrypt('developer'),
                 'name' => '开发'
+            ],
+            [
+                'username' => 'common',
+                'password' => bcrypt('common'),
+                'name' => '普通使用人员'
             ]
         ]);
 
@@ -53,14 +58,24 @@ class AdminTablesSeeder extends Seeder
             [
                 'name' => 'development',
                 'slug' => '开发'
+            ],
+            [
+                'name' => 'common',
+                'slug' => '普通用户'
             ]]);
 
         // add role to user.
         Administrator::first()->roles()->save(Role::first());
         // developer 用户 授予 development 角色
         Administrator::firstWhere('username', 'developer')->roles()->save(Role::firstWhere('name', 'development'));
+        Administrator::firstWhere('username', 'developer')->roles()->save(Role::firstWhere('name', 'common'));
         // maintainer 用户 授予 maintenance 角色
         Administrator::firstWhere('username', 'maintainer')->roles()->save(Role::firstWhere('name', 'maintenance'));
+        Administrator::firstWhere('username', 'maintainer')->roles()->save(Role::firstWhere('name', 'common'));
+
+        // 普通用户 角色
+        Administrator::firstWhere('username', 'common')->roles()->save(Role::firstWhere('name', 'common'));
+
 
 //        权限
         //create a permission
@@ -97,43 +112,37 @@ class AdminTablesSeeder extends Seeder
                 'http_path' => "/auth/roles\r\n/auth/permissions\r\n/auth/menu\r\n/auth/logs",
             ],
             [
-                'name' => 'api',
-                'slug' => 'api访问',
-                'http_method' => '',
-                'http_path' => '/api/*\r\n'
-            ],
-            [
                 'name' => 'templates',
-                'slug' => '模板',
+                'slug' => 'templates',
                 'http_method' => '',
-                'http_path' => "/templates\r\n/templates/*"
+                'http_path' => "/templates*"
             ],
             [
                 'name' => 'activities',
-                'slug' => '活动',
+                'slug' => 'activities',
                 'http_method' => '',
-                'http_path' => "/activities*\r\napi*\r\n/awards/*"
+                'http_path' => "/activities*\r\n/api*\r\n/awards/*"
             ],
             [
                 'name' => 'certificates',
                 'slug' => '证书',
                 'http_method' => '',
-                'http_path' => "/certificates*\r\napi*"
+                'http_path' => "/certificates*\r\n/api*"
             ],
             [
                 'name' => 'activities_manage',
                 'http_method' => '',
-                'slug' => '活动管理',
+                'slug' => 'activities_manage',
                 'http_path' => ''
             ], [
                 'name' => 'certificates_manage',
                 'http_method' => '',
-                'slug' => '证书管理',
+                'slug' => 'certificates_manage',
                 'http_path' => ''
             ], [
                 'name' => 'templates_manage',
                 'http_method' => '',
-                'slug' => '模板管理权限',
+                'slug' => 'templates_manage',
                 'http_path' => ''
             ],
         ]);
@@ -145,10 +154,17 @@ class AdminTablesSeeder extends Seeder
         Role::firstWhere('name', 'maintenance')->permissions()->save(Permission::firstWhere('name', 'activities_manage'));
         Role::firstWhere('name', 'development')->permissions()->save(Permission::firstWhere('name', 'certificates_manage'));
 
-
         // 开发 角色 授权
         Role::firstWhere('name', 'development')->permissions()->save(Permission::firstWhere('name', 'templates'));
         Role::firstWhere('name', 'development')->permissions()->save(Permission::firstWhere('name', 'templates_manage'));
+
+        // 普通用户角色 授权
+        Role::firstWhere('name', 'common')->permissions()->save(Permission::firstWhere('name', 'activities'));
+        Role::firstWhere('name', 'common')->permissions()->save(Permission::firstWhere('name', 'certificates'));
+        Role::firstWhere('name', 'common')->permissions()->save(Permission::firstWhere('name', 'templates'));
+        Role::firstWhere('name', 'common')->permissions()->save(Permission::firstWhere('name', 'Dashboard'));
+
+
 
 
         // add default menus.
@@ -236,10 +252,10 @@ class AdminTablesSeeder extends Seeder
         // add role to menu.
         // 后台目录 的权限给 管理员
         Menu::first()->roles()->save(Role::first());
-        // 运营目录 的权限 给 运营 角色
-        Menu::find(2)->roles()->save(Role::firstWhere('name','maintenance'));
+        // 运营目录 的权限 给 common 角色
+        Menu::find(2)->roles()->save(Role::firstWhere('name','common'));
 
-        // 开发目录 的权限 给 开发角色
-        Menu::find(3)->roles()->save(Role::firstWhere('name','development'));
+        // 开发目录 的权限 给 common 角色
+        Menu::find(3)->roles()->save(Role::firstWhere('name','common'));
     }
 }

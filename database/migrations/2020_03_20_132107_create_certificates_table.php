@@ -18,6 +18,7 @@ class CreateCertificatesTable extends Migration
             $table->string('code')->unique();
             $table->foreignId('activity_id')->constrained('activities')->onDelete('cascade');
             $table->foreignId('award_id');
+            $table->foreignId('creator');
             $table->string('name')->index();
             $table->string('text1')->nullable();
             $table->string('text2')->nullable();

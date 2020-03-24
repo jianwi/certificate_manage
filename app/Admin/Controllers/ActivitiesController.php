@@ -6,6 +6,7 @@ use App\Models\Activity;
 use App\Models\Template;
 use App\Models\User;
 use Encore\Admin\Admin;
+use Encore\Admin\Auth\Permission;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -30,24 +31,23 @@ class ActivitiesController extends AdminController
     {
         $grid = new Grid(new Activity());
 
+        if (!\Encore\Admin\Facades\Admin::user()->can('activities_manage')){
+            $grid->model()->where('user_id', \Encore\Admin\Facades\Admin::user()->id);
+        }
 
-
-        $grid->filter(function($filter){
+        $grid->filter(function ($filter) {
             $filter->disableIdFilter();
-            $filter->contains('name','名称');
-            $filter->between('created_at','创建时间')->datetime();
+            $filter->contains('name', '名称');
+            $filter->between('created_at', '创建时间')->datetime();
         });
 
         $grid->column('id', __('Id'));
         $grid->column('name', '名称')->editable();
-        $grid->column('user_id', '用户')->display(function ($user_id) {
-            return User::find($user_id)->name;
-        })->filter([
-            \Encore\Admin\Facades\Admin::user()->id => '我的',
-        ]);;
-        $grid->column('template_id', '模板')->display(function ($template_id) {
-            return Template::find($template_id)->name;
-        });
+
+//        受用模型关联获取 user.name  下同
+        $grid->column('user.name', '用户');
+        $grid->column('template.name', '模板');
+
         $grid->column('created_at', __('创建时间'))->date('Y-m-d H:i:s');
         $grid->column('updated_at', __('更新时间'))->date('Y-m-d H:i:s');
 
@@ -65,7 +65,7 @@ class ActivitiesController extends AdminController
         $show = new Show(Activity::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('name',  '名称');
+        $show->field('name', '名称');
         $show->field('content', '活动详情');
         $show->field('user_id', '创建用户')->as(function ($user_id) {
             return User::find($user_id)->name;
@@ -74,7 +74,7 @@ class ActivitiesController extends AdminController
             return Template::find($template_id)->name;
         });
 
-        $show->awards('获奖信息',function ($award){
+        $show->awards('获奖信息', function ($award) {
             $award->resource('/admin/awards');
 
             $award->disableExport();
@@ -99,12 +99,10 @@ class ActivitiesController extends AdminController
      */
     protected function form()
     {
+//        禁用表单按钮
         Form::init(function (Form $form) {
-
             $form->disableEditingCheck();
-
             $form->disableCreatingCheck();
-
             $form->disableViewCheck();
         });
 
@@ -114,25 +112,25 @@ class ActivitiesController extends AdminController
             ->creationRules(['required', "unique:activities"]);
 
         $form->textarea('content', '活动内容')->required();
+
         $form->display('user_id', '创建者')->with(function ($value) {
             return \Encore\Admin\Facades\Admin::user()->name;
         });
 
-        $form->select('template_id', __('模板'))->options(function ($id){
+        $form->select('template_id', __('模板'))->options(function ($id) {
             $template = Template::find($id);
-
             if ($template) {
                 return [$template->id => $template->name];
             }
         })->ajax('/admin/api/templates')
             ->required();
 
-        $form->hasMany('awards','奖项', function (Form\NestedForm $form){
-            $form->text('name','奖项名称');
-            $form->textarea('content','奖项描述');
+        $form->hasMany('awards', '奖项', function (Form\NestedForm $form) {
+            $form->text('name', '奖项名称');
+            $form->textarea('content', '奖项描述');
         })->rules('required');
 
-        $form->submitted(function (Form $form){
+        $form->submitted(function (Form $form) {
             $form->user_id = \Encore\Admin\Facades\Admin::user()->id;
         });
 

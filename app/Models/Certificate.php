@@ -19,4 +19,9 @@ class Certificate extends Model
     {
         return $this->belongsTo(Award::class);
     }
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
