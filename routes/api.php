@@ -19,4 +19,6 @@ Route::prefix('v1')->name('api.v1.')->group(function() {
     Route::get('version', function() {
         return 'this is version v1';
     })->name('version');
+
+    Route::resource('certificates','Api\CertificatesController');
 });

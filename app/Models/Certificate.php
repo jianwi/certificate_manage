@@ -9,6 +9,7 @@ class Certificate extends Model
     protected $hidden = ['isDelete'];
 
     protected $fillable = ['name', 'text1', 'text2', 'text3', 'text4', 'text5', 'text6', 'text7', 'text8', 'award_id', 'activity_id'];
+
     //
     public function activity()
     {
@@ -23,5 +24,11 @@ class Certificate extends Model
     public function creator()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function getCreatedAtColumn()
+    {
+        return $this->attributes['created_at'];
+
     }
 }
