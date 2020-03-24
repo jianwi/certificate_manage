@@ -97,24 +97,59 @@ class AdminTablesSeeder extends Seeder
                 'http_path' => "/auth/roles\r\n/auth/permissions\r\n/auth/menu\r\n/auth/logs",
             ],
             [
-                'name' => 'development',
-                'slug' => '开发',
+                'name' => 'api',
+                'slug' => 'api访问',
                 'http_method' => '',
-                'http_path' => "/templates\r\n/templates/*\r\n/api/*\r\n/"
+                'http_path' => '/api/*\r\n'
             ],
             [
-                'name' => 'maintenance',
-                'slug' => '运维',
+                'name' => 'templates',
+                'slug' => '模板',
                 'http_method' => '',
-                'http_path' => "/activities\r\n/activities/*\r\n/certificates\r\n/certificates/*\r\n/awards\r\n/awards/*\r\n/api/*\r\n/"
-            ]
+                'http_path' => "/templates\r\n/templates/*"
+            ],
+            [
+                'name' => 'activities',
+                'slug' => '活动',
+                'http_method' => '',
+                'http_path' => "/activities*\r\napi*\r\n/awards/*"
+            ],
+            [
+                'name' => 'certificates',
+                'slug' => '证书',
+                'http_method' => '',
+                'http_path' => "/certificates*\r\napi*"
+            ],
+            [
+                'name' => 'activities_manage',
+                'http_method' => '',
+                'slug' => '活动管理',
+                'http_path' => ''
+            ], [
+                'name' => 'certificates_manage',
+                'http_method' => '',
+                'slug' => '证书管理',
+                'http_path' => ''
+            ], [
+                'name' => 'templates_manage',
+                'http_method' => '',
+                'slug' => '模板管理权限',
+                'http_path' => ''
+            ],
         ]);
 
         Role::first()->permissions()->save(Permission::first());
         // 运营 角色 授权
-        Role::firstWhere('name', 'maintenance')->permissions()->save(Permission::firstWhere('name', 'maintenance'));
+        Role::firstWhere('name', 'maintenance')->permissions()->save(Permission::firstWhere('name', 'activities'));
+        Role::firstWhere('name', 'maintenance')->permissions()->save(Permission::firstWhere('name', 'certificates'));
+        Role::firstWhere('name', 'maintenance')->permissions()->save(Permission::firstWhere('name', 'activities_manage'));
+        Role::firstWhere('name', 'development')->permissions()->save(Permission::firstWhere('name', 'certificates_manage'));
+
+
         // 开发 角色 授权
-        Role::firstWhere('name', 'development')->permissions()->save(Permission::firstWhere('name', 'development'));
+        Role::firstWhere('name', 'development')->permissions()->save(Permission::firstWhere('name', 'templates'));
+        Role::firstWhere('name', 'development')->permissions()->save(Permission::firstWhere('name', 'templates_manage'));
+
 
         // add default menus.
         Menu::truncate();
@@ -203,6 +238,7 @@ class AdminTablesSeeder extends Seeder
         Menu::first()->roles()->save(Role::first());
         // 运营目录 的权限 给 运营 角色
         Menu::find(2)->roles()->save(Role::firstWhere('name','maintenance'));
+
         // 开发目录 的权限 给 开发角色
         Menu::find(3)->roles()->save(Role::firstWhere('name','development'));
     }

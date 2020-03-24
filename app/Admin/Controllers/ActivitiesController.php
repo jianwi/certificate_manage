@@ -31,6 +31,7 @@ class ActivitiesController extends AdminController
         $grid = new Grid(new Activity());
 
 
+
         $grid->filter(function($filter){
             $filter->disableIdFilter();
             $filter->contains('name','名称');
@@ -41,7 +42,9 @@ class ActivitiesController extends AdminController
         $grid->column('name', '名称')->editable();
         $grid->column('user_id', '用户')->display(function ($user_id) {
             return User::find($user_id)->name;
-        });
+        })->filter([
+            \Encore\Admin\Facades\Admin::user()->id => '我的',
+        ]);;
         $grid->column('template_id', '模板')->display(function ($template_id) {
             return Template::find($template_id)->name;
         });
