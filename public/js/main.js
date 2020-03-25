@@ -3572,17 +3572,55 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      certificates: []
+      page_size: 10,
+      certificates: [],
+      currentPage: 1,
+      total: undefined
     };
   },
+  methods: {
+    handleSizeChange: function handleSizeChange(val) {
+      this.page_size = val;
+      this.updateList();
+    },
+    handleCurrentChange: function handleCurrentChange(val) {
+      this.currentPage = val;
+      this.updateList();
+    },
+    updateList: function updateList() {
+      var _this = this;
+
+      this.$http.get(this.$url + '/certificates?' + 'page=' + this.currentPage + '&per_page=' + this.page_size).then(function (res) {
+        _this.certificates = res.data.data;
+      });
+    }
+  },
   created: function created() {
-    var _this = this;
+    var _this2 = this;
 
     this.$http.get(this.$url + '/certificates').then(function (res) {
-      _this.certificates = res.data.data;
+      _this2.certificates = res.data.data;
+      _this2.total = res.data.meta.total;
     });
   }
 });
@@ -64998,35 +65036,58 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "el-table",
-    { staticStyle: { width: "100%" }, attrs: { data: _vm.certificates } },
+    "div",
     [
-      _c("el-table-column", { attrs: { prop: "code", label: "证书编码" } }),
+      _c(
+        "el-table",
+        {
+          staticStyle: { width: "100%" },
+          attrs: { data: _vm.certificates, height: "500", width: "300" }
+        },
+        [
+          _c("el-table-column", { attrs: { prop: "code", label: "证书编码" } }),
+          _vm._v(" "),
+          _c("el-table-column", {
+            attrs: {
+              "header-align": "center",
+              align: "center",
+              prop: "activity",
+              label: "活动名称"
+            }
+          }),
+          _vm._v(" "),
+          _c("el-table-column", {
+            attrs: {
+              "header-align": "center",
+              align: "center",
+              prop: "name",
+              label: "获奖人/组织"
+            }
+          }),
+          _vm._v(" "),
+          _c("el-table-column", {
+            attrs: {
+              "header-align": "center",
+              align: "center",
+              prop: "created_at",
+              label: "颁奖日期"
+            }
+          })
+        ],
+        1
+      ),
       _vm._v(" "),
-      _c("el-table-column", {
+      _c("el-pagination", {
         attrs: {
-          "header-align": "center",
-          align: "center",
-          prop: "activity",
-          label: "活动名称"
-        }
-      }),
-      _vm._v(" "),
-      _c("el-table-column", {
-        attrs: {
-          "header-align": "center",
-          align: "center",
-          prop: "name",
-          label: "获奖人/组织"
-        }
-      }),
-      _vm._v(" "),
-      _c("el-table-column", {
-        attrs: {
-          "header-align": "center",
-          align: "center",
-          prop: "created_at",
-          label: "颁奖日期"
+          "current-page": _vm.currentPage,
+          "page-sizes": [10, 20, 30, 50],
+          "page-size": _vm.page_size,
+          layout: "total, sizes, prev, pager, next, jumper",
+          total: _vm.total
+        },
+        on: {
+          "size-change": _vm.handleSizeChange,
+          "current-change": _vm.handleCurrentChange
         }
       })
     ],

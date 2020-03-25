@@ -17,15 +17,16 @@ class CertificatesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
 
+        $per_page = $request->per_page;
         $certificates = QueryBuilder::for(Certificate::class)
             ->with(['activity','award'])
             ->allowedFilters(['name', 'activity.name'])
             ->defaultSort('-created_at')
-            ->paginate();
+            ->paginate($per_page);
 
         return CertificateListResource::collection($certificates);
     }
