@@ -1,14 +1,17 @@
 <template>
-    <certificates-list></certificates-list>
+    <div>
+        <certificates-list></certificates-list>
+        <pagination></pagination>
+    </div>
 </template>
 
 <script>
 
 import CertificatesList from "../ component/CertificatesList";
-
+import Pagination from "../ component/Pagination";
     export default {
         name: "Home",
-        components: {CertificatesList}
+        components: {CertificatesList,Pagination}
     }
 </script>
 

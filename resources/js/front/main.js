@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import router from "./router";
+import store from "./store"
 import App from "./App";
 import api from "./http/api";
 import http from "./http/http";
@@ -20,5 +21,6 @@ Vue.prototype.$api = api;
 Vue.prototype.$http = http
 new Vue({
     router,
+    store,
     render: h => h(App)
 }).$mount("#app")
