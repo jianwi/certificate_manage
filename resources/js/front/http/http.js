@@ -7,11 +7,13 @@ export default {
      * @param auth 是否需要带登录信息
      * @returns {AxiosPromise<any>}
      */
-    get(url, auth = false) {
+    get(url,params={}, auth = false) {
         if (auth) {
             return axios.get(url, {headers: {Authorization: 'Your back-end user authenticates information'}});
         } else {
-            return axios.get(url);
+            return axios.get(url,{
+                params:params
+            });
         }
     },
 

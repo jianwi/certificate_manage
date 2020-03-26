@@ -8,6 +8,7 @@ use App\Http\Resources\CertificateResource;
 use App\Models\Certificate;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class CertificatesController extends Controller
@@ -24,7 +25,7 @@ class CertificatesController extends Controller
         $per_page = $request->per_page;
         $certificates = QueryBuilder::for(Certificate::class)
             ->with(['activity','award'])
-            ->allowedFilters(['name', 'activity.name'])
+            ->allowedFilters(['name', 'activity.name',AllowedFilter::exact('code')])
             ->defaultSort('-created_at')
             ->paginate($per_page);
 

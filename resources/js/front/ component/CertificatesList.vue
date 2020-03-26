@@ -49,7 +49,7 @@
             }
         },
         created: function () {
-           this.$store.dispatch('Init',this)
+           this.$store.dispatch('Update',this)
         }
     }
 </script>
