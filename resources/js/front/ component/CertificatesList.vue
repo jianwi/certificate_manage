@@ -5,6 +5,7 @@
             height="500"
             width="300"
             style="width: 100%"
+            @row-click="handleRowClick"
         >
 
             <el-table-column
@@ -46,6 +47,13 @@
         computed:{
             certificates(){
                 return this.$store.state.certificates
+            }
+        },
+        methods:{
+            handleRowClick(event){
+                console.log(event)
+                window.x = event
+                this.$router.push('/' + event.code)
             }
         },
         created: function () {
