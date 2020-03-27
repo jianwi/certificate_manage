@@ -2,12 +2,18 @@
     <el-card
         class="card-box"
     >
-<!--        <p>-->
-<!--            <b>年份：</b>-->
-<!--            <el-button type="mini">2020</el-button>-->
-<!--        </p>-->
+        <!--        <p>-->
+        <!--            <b>年份：</b>-->
+        <!--            <el-button type="mini">2020</el-button>-->
+        <!--        </p>-->
         <p>
             <b>活动：</b>
+            <el-button type="mini"
+                       class="item-box"
+                       @click="ActivitiesAll"
+            >
+                全部
+            </el-button>
             <el-button
                 class="item-box"
                 size="mini"
@@ -20,12 +26,12 @@
             </el-button>
         </p>
         <p v-show="awards.length != 0">
-            <b>奖励：</b>
+            <b>奖项：</b>
             <el-button class="item-box"
                        size="mini"
                        v-for="(award,index) in awards"
                        :key="index"
-                        @click="AwardClickHandle(award.id)"
+                       @click="AwardClickHandle(award.id)"
             >
                 {{ award.name }}
             </el-button>
@@ -43,28 +49,32 @@
                 awards: [],
             }
         },
-        methods:{
-            ActivityClickHandle(activity_id,activity_name){
+        methods: {
+            ActivityClickHandle(activity_id, activity_name) {
 
-                this.$store.commit('SetFilterKey',{
-                    filter_key : 'activity.name'
+                this.$store.commit('SetFilterKey', {
+                    filter_key: 'activity.name'
                 })
 
-                this.$store.commit('SetFilterValue',{
+                this.$store.commit('SetFilterValue', {
                     'filter_value': activity_name
                 })
 
-                this.$store.dispatch('Update',this)
+                this.$store.dispatch('Update', this)
 
-                this.$http.get(this.$url + '/awards/' + activity_id).then(res=>{
-                  this.awards = res.data.data
+                this.$http.get(this.$url + '/awards/' + activity_id).then(res => {
+                    this.awards = res.data.data
                 })
             },
-            AwardClickHandle(award_id){
-                this.$store.commit('SetFilterKey',{ filter_key : 'award.id' })
-                this.$store.commit('SetFilterValue',{ filter_value : award_id })
+            AwardClickHandle(award_id) {
+                this.$store.commit('SetFilterKey', {filter_key: 'award.id'})
+                this.$store.commit('SetFilterValue', {filter_value: award_id})
 
-                this.$store.dispatch('Update',this)
+                this.$store.dispatch('Update', this)
+            },
+            ActivitiesAll(){
+                this.$store.commit('CancelFilterValue')
+                this.$store.dispatch('Update', this)
             }
         },
         created() {

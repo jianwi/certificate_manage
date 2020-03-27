@@ -3758,6 +3758,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Recommend",
   data: function data() {
@@ -3788,6 +3794,10 @@ __webpack_require__.r(__webpack_exports__);
       this.$store.commit('SetFilterValue', {
         filter_value: award_id
       });
+      this.$store.dispatch('Update', this);
+    },
+    ActivitiesAll: function ActivitiesAll() {
+      this.$store.commit('CancelFilterValue');
       this.$store.dispatch('Update', this);
     }
   },
@@ -65581,6 +65591,16 @@ var render = function() {
       [
         _c("b", [_vm._v("活动：")]),
         _vm._v(" "),
+        _c(
+          "el-button",
+          {
+            staticClass: "item-box",
+            attrs: { type: "mini" },
+            on: { click: _vm.ActivitiesAll }
+          },
+          [_vm._v("\n            全部\n        ")]
+        ),
+        _vm._v(" "),
         _vm._l(_vm.activities, function(activity, index) {
           return _c(
             "el-button",
@@ -65595,11 +65615,7 @@ var render = function() {
                 }
               }
             },
-            [
-              _vm._v(
-                "\n                " + _vm._s(activity.name) + "\n            "
-              )
-            ]
+            [_vm._v("\n            " + _vm._s(activity.name) + "\n        ")]
           )
         })
       ],
@@ -65619,7 +65635,7 @@ var render = function() {
         ]
       },
       [
-        _c("b", [_vm._v("奖励：")]),
+        _c("b", [_vm._v("奖项：")]),
         _vm._v(" "),
         _vm._l(_vm.awards, function(award, index) {
           return _c(
@@ -65634,11 +65650,7 @@ var render = function() {
                 }
               }
             },
-            [
-              _vm._v(
-                "\n                " + _vm._s(award.name) + "\n            "
-              )
-            ]
+            [_vm._v("\n            " + _vm._s(award.name) + "\n        ")]
           )
         })
       ],
@@ -82692,6 +82704,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     SetFilterValue: function SetFilterValue(state, _ref6) {
       var filter_value = _ref6.filter_value;
       state.filter_value = filter_value;
+    },
+    CancelFilterValue: function CancelFilterValue(state) {
+      state.filter_value = undefined;
     }
   },
   actions: {
@@ -82704,8 +82719,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
       };
 
       if ('undefined' != typeof state.filter_value) {
-        vue__WEBPACK_IMPORTED_MODULE_0___default.a.set(params, 'filter[' + state.filter_key + ']', state.filter_value);
-        console.log('现在给params 添加了filter');
+        vue__WEBPACK_IMPORTED_MODULE_0___default.a.set(params, 'filter[' + state.filter_key + ']', state.filter_value); // console.log('现在给params 添加了filter')
       }
 
       app.$http.get(app.$url + '/certificates', params).then(function (res) {

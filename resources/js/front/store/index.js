@@ -31,6 +31,9 @@ const store = new Vuex.Store({
         },
         SetFilterValue(state,{ filter_value }){
             state.filter_value = filter_value
+        },
+        CancelFilterValue(state){
+            state.filter_value = undefined
         }
     },
     actions: {
@@ -43,7 +46,7 @@ const store = new Vuex.Store({
             if('undefined' != typeof state.filter_value) {
                 Vue.set(params, 'filter[' + state.filter_key + ']', state.filter_value)
 
-                console.log('现在给params 添加了filter')
+                // console.log('现在给params 添加了filter')
             }
 
             app.$http.get(app.$url + '/certificates', params).then(res => {
