@@ -10,19 +10,23 @@ $factory->define(\App\Models\Template::class,function (Faker\Generator $faker){
     width: 500px;
     height: 900px;
     margin:auto;
-    background-image: url(http://www.yiban.cn/public/renzheng/img/cert/2019-dc-completion.66736ae9.png);
+    background-image: url(\'/images/zs.png\');
     background-size: contain;
     background-repeat: no-repeat;
     padding: 50px;
     padding-top: 200px;
 ">
-    <div class="mt-5 p-2 text-center">
-        <h3>${text1}</h3>
-        <p>${text2}</p>
-        <div id="qrCode" class="mt-3">
+    <div class="mt-5 p-2">
+        <h3><b>${text1}</b> 同学：</h3>
+        <br>
+        <p class="h4">您在 <b>${text2}</b> 活动中获得 <b>${text3}</b> 称号</p>
+        <p class="mt-2"></p>
+        <h3 class="text-center">特发此证，以资鼓励</h3>
+        <div class="mt-2 text-center">
             <img width="100px" src="${qr_code}" id="qr_img" />
+            <p class="mt-2">证书编号: <span id="code_container">${code}</span></p>
         </div>
-        <p>证书编号: <span id="code_container">${code}</span></p>
+
     </div>
 </div>
 

@@ -3799,6 +3799,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     ActivitiesAll: function ActivitiesAll() {
       this.$store.commit('CancelFilterValue');
+      this.awards = [];
       this.$store.dispatch('Update', this);
     }
   },

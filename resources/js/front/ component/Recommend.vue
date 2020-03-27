@@ -74,6 +74,7 @@
             },
             ActivitiesAll(){
                 this.$store.commit('CancelFilterValue')
+                this.awards = []
                 this.$store.dispatch('Update', this)
             }
         },
