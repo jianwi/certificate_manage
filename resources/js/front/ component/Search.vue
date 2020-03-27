@@ -6,7 +6,9 @@
     >
         <el-select v-model="filter_key"
                    slot="prepend"
-                   class="el-select" placeholder="搜索类型">
+                   class="el-select" placeholder="搜索类型"
+
+        >
             <el-option
                 v-for="item in filter_types"
                 :key="item.value"
@@ -14,7 +16,12 @@
                 :value="item.value">
             </el-option>
         </el-select>
-        <el-button type="primary" slot="append" icon="el-icon-search"></el-button>
+        <el-button
+            slot="append"
+            type="primary"
+            icon="el-icon-search">
+
+        </el-button>
 
     </el-input>
 </template>
@@ -45,21 +52,21 @@
                 ]
             }
         },
-        computed:{
+        computed: {
             filter_key: {
-                get:function(){
+                get: function () {
                     return this.$store.state.filter_key
                 },
-                set:function(newValue){
-                    return this.$store.commit('SetFilterKey',{ filter_key: newValue})
+                set: function (newValue) {
+                    return this.$store.commit('SetFilterKey', {filter_key: newValue})
                 }
             },
             filter_value: {
-                get: function(){
+                get: function () {
                     return this.$store.state.filter_value
                 },
-                set: function(newValue){
-                    return this.$store.commit('SetFilterValue',{ filter_value: newValue})
+                set: function (newValue) {
+                    return this.$store.commit('SetFilterValue', {filter_value: newValue})
                 }
             }
         }

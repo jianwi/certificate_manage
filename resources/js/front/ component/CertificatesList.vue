@@ -2,6 +2,7 @@
     <div>
         <el-table
             :data="certificates"
+            :width="100"
             style="width: 100%"
             @row-click="handleRowClick"
         >
@@ -59,7 +60,7 @@
             handleRowClick(event){
                 console.log(event)
                 window.x = event
-                this.$router.push('/' + event.code)
+                this.$router.push('/info/' + event.code)
             }
         },
         created: function () {

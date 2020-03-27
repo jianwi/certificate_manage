@@ -15,7 +15,7 @@ class QrcodeController extends Controller
             ->size(300)
             ->margin(0)
             ->errorCorrection('H')
-            ->generate(route('certificates.index').'/#/'.$code);
+            ->generate(route('certificates.index').'/#/info/'.$code);
 
         return response($qrcode)->header('Content-type','image/png');
 
