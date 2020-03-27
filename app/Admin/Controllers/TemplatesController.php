@@ -76,7 +76,7 @@ class TemplatesController extends AdminController
         $form = new Form(new Template());
 
         $form->text('name', __('Name'));
-        $form->textarea('content', __('Content'));
+        $form->css('content', __('Content'));
 
         $form->image('image','证书缩略图')->uniqueName();
 

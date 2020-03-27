@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "88066be0835296bce8c44f50654a0c56",
+    "content-hash": "c0347d42554d8f5ed8f844d73329b77e",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1151,6 +1151,127 @@
             ],
             "description": "Highlight PHP code in terminal",
             "time": "2018-09-29T18:48:56+00:00"
+        },
+        {
+            "name": "jxlwqq/code-mirror",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel-admin-extensions/code-mirror.git",
+                "reference": "7622d7ba1b73a0fc2c27a477f7f75c5a5e8ba8de"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel-admin-extensions/code-mirror/zipball/7622d7ba1b73a0fc2c27a477f7f75c5a5e8ba8de",
+                "reference": "7622d7ba1b73a0fc2c27a477f7f75c5a5e8ba8de",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "encore/laravel-admin": "~1.6",
+                "php": ">=7.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Jxlwqq\\CodeMirror\\CodeMirrorServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Jxlwqq\\CodeMirror\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "jxlwqq",
+                    "email": "jxlwqq@gmail.com"
+                }
+            ],
+            "description": "code editor extension for laravel-admin",
+            "homepage": "https://github.com/jxlwqq/code-mirror",
+            "keywords": [
+                "extension",
+                "laravel-admin"
+            ],
+            "time": "2018-09-11T17:18:52+00:00"
+        },
+        {
+            "name": "laravel-admin-ext/css-editor",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel-admin-extensions/css-editor.git",
+                "reference": "6ef931e5b161c5735d053f680638a912142478cf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel-admin-extensions/css-editor/zipball/6ef931e5b161c5735d053f680638a912142478cf",
+                "reference": "6ef931e5b161c5735d053f680638a912142478cf",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "jxlwqq/code-mirror": "*",
+                "php": ">=7.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Encore\\CssEditor\\CssEditorServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Encore\\CssEditor\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "song",
+                    "email": "zosong@126.com"
+                }
+            ],
+            "description": "CSS editor extension for laravel-admin",
+            "homepage": "https://github.com/laravel-admin-ext/css-editor",
+            "keywords": [
+                "code mirror",
+                "css",
+                "editor",
+                "extension",
+                "laravel-admin",
+                "less",
+                "scss"
+            ],
+            "time": "2018-09-12T05:11:21+00:00"
         },
         {
             "name": "laravel/framework",
@@ -5219,6 +5340,68 @@
                 "schema"
             ],
             "time": "2019-09-25T14:49:45+00:00"
+        },
+        {
+            "name": "laravel-admin-ext/js-editor",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel-admin-extensions/js-editor.git",
+                "reference": "4657c3df82bc6ac7919ce7460d0a8ac37f04dd72"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel-admin-extensions/js-editor/zipball/4657c3df82bc6ac7919ce7460d0a8ac37f04dd72",
+                "reference": "4657c3df82bc6ac7919ce7460d0a8ac37f04dd72",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "jxlwqq/code-mirror": "*",
+                "php": ">=7.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Encore\\JsEditor\\JsEditorServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Encore\\JsEditor\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "song",
+                    "email": "zosong@126.com"
+                }
+            ],
+            "description": "Javascript editor extension for laravel-admin",
+            "homepage": "https://github.com/laravel-admin-ext/js-editor",
+            "keywords": [
+                "JS",
+                "code mirror",
+                "editor",
+                "extension",
+                "javascript",
+                "laravel-admin"
+            ],
+            "time": "2018-09-11T17:20:09+00:00"
         },
         {
             "name": "laravel/ui",
