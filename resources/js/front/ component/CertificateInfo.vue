@@ -15,7 +15,7 @@
         mounted() {
             this.$http.get(this.$url + '/certificates/' + this.$route.params.code,).then(res => {
                 console.log("返回的res是", res)
-                let template = window.atob(res.data.data.template)
+                let template = res.data.data.template
                 let texts = res.data.data.text
                 console.log('texts 的值：', texts)
                 let origin_key = template.match(/\$\{[^}]+\}/g)

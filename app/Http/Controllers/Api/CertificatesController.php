@@ -37,7 +37,9 @@ class CertificatesController extends Controller
      */
     public function show($code)
     {
-        return new CertificateResource(Certificate::firstWhere('code', $code));
+
+        $certificate = Certificate::firstWhere('code', $code);
+        return new CertificateResource($certificate);
     }
 
 }

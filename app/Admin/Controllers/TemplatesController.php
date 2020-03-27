@@ -83,6 +83,7 @@ class TemplatesController extends AdminController
         // 表单提交后,保存前事件
         $form->submitted(function (Form $form){
             $form->user_id = \Encore\Admin\Facades\Admin::user()->id;
+//            $form->content = base64_encode($form->content);
         });
 
         return $form;

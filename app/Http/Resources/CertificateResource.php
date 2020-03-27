@@ -17,7 +17,7 @@ class CertificateResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'template' => base64_encode($this->activity->template->content),
+            'template' => $this->activity->template->content,
             'award' => $this->award->name,
             'code' => $this->code,
             'text' => [

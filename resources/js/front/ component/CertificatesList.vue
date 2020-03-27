@@ -2,8 +2,6 @@
     <div>
         <el-table
             :data="certificates"
-            height="500"
-            width="300"
             style="width: 100%"
             @row-click="handleRowClick"
         >

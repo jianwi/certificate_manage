@@ -1,5 +1,6 @@
 <template>
     <div>
+        <el-x
         <search></search>
         <recommend></recommend>
         <certificates-list></certificates-list>

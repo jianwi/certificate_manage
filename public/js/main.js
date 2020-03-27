@@ -3560,7 +3560,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
     this.$http.get(this.$url + '/certificates/' + this.$route.params.code).then(function (res) {
       console.log("返回的res是", res);
-      var template = window.atob(res.data.data.template);
+      var template = res.data.data.template;
       var texts = res.data.data.text;
       console.log('texts 的值：', texts);
       var origin_key = template.match(/\$\{[^}]+\}/g);
