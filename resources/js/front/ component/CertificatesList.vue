@@ -31,6 +31,14 @@
             <el-table-column
                 header-align="center"
                 align="center"
+                prop="award"
+                label="奖项"
+            >
+            </el-table-column>
+
+            <el-table-column
+                header-align="center"
+                align="center"
                 prop="created_at"
                 label="颁奖日期"
             >
@@ -58,6 +66,7 @@
         },
         created: function () {
            this.$store.dispatch('Update',this)
+            this.loading = false
         }
     }
 </script>

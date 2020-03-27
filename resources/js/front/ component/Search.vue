@@ -37,6 +37,10 @@
                     {
                         label: '获奖个人/单位',
                         value: 'name'
+                    },
+                    {
+                        label: '奖项代码',
+                        value: 'award.id'
                     }
                 ]
             }
