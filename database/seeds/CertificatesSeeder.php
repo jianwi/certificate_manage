@@ -12,6 +12,6 @@ class CertificatesSeeder extends Seeder
     public function run()
     {
         //
-        factory(\App\Models\Certificate::class,50)->create();
+        factory(\App\Models\Certificate::class,200)->create();
     }
 }

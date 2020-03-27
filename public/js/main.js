@@ -3648,8 +3648,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: {
     certificates: function certificates() {
@@ -3954,6 +3952,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _component_Pagination__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ component/Pagination */ "./resources/js/front/ component/Pagination.vue");
 /* harmony import */ var _component_Search__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ component/Search */ "./resources/js/front/ component/Search.vue");
 /* harmony import */ var _component_Recommend__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../ component/Recommend */ "./resources/js/front/ component/Recommend.vue");
+//
 //
 //
 //
@@ -65470,7 +65469,7 @@ var render = function() {
         "el-table",
         {
           staticStyle: { width: "100%" },
-          attrs: { data: _vm.certificates, height: "500", width: "300" },
+          attrs: { data: _vm.certificates },
           on: { "row-click": _vm.handleRowClick }
         },
         [

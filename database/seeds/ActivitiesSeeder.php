@@ -11,6 +11,6 @@ class ActivitiesSeeder extends Seeder
      */
     public function run()
     {
-        $activities = factory(\App\Models\Activity::class,30)->create();
+        $activities = factory(\App\Models\Activity::class,15)->create();
     }
 }
