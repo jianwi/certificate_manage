@@ -15,7 +15,6 @@ class ActivitiesController extends Controller
      */
     public function index()
     {
-        //
         $activities = Activity::orderBy('created_at','desc')->limit(10)->get();
         return ActivityResource::collection($activities);
     }

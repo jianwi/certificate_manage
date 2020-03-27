@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\CertificateListResource;
 use App\Http\Resources\CertificateResource;
 use App\Models\Certificate;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -20,8 +19,6 @@ class CertificatesController extends Controller
      */
     public function index(Request $request)
     {
-        //
-
         $per_page = $request->per_page;
         $certificates = QueryBuilder::for(Certificate::class)
             ->with(['activity', 'award'])
@@ -33,17 +30,6 @@ class CertificatesController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param int $id
@@ -51,30 +37,7 @@ class CertificatesController extends Controller
      */
     public function show($code)
     {
-        //
         return new CertificateResource(Certificate::firstWhere('code', $code));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
