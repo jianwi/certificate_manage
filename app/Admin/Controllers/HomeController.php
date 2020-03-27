@@ -13,21 +13,19 @@ class HomeController extends Controller
     public function index(Content $content)
     {
         return $content
-            ->title('Dashboard')
-            ->description('Description...')
-            ->row(Dashboard::title())
+            ->title('证书管理系统')
+            ->description('留住每一次荣耀')
+            ->row('<iframe width="100%" height="600px" src="/"></iframe>')
             ->row(function (Row $row) {
 
                 $row->column(4, function (Column $column) {
-                    $column->append(Dashboard::environment());
+
                 });
 
                 $row->column(4, function (Column $column) {
-                    $column->append(Dashboard::extensions());
                 });
 
                 $row->column(4, function (Column $column) {
-                    $column->append(Dashboard::dependencies());
                 });
             });
     }
