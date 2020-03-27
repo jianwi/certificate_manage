@@ -24,4 +24,7 @@ Route::prefix('v1')->name('api.v1.')->group(function() {
     Route::get('activities','Api\ActivitiesController@index');
 
     Route::get('awards/{activity}','Api\AwardsController@index');
+
 });
+
+Route::get('qr/{code}','Api\QrcodeController@QrCode')->name('qrcode');

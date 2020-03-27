@@ -30,7 +30,7 @@ class CertificateResource extends JsonResource
                 'text7' => $this->text7,
                 'text8' => $this->text8,
                 'code'  => $this->code,
-                'qr_code' => ''
+                'qr_code' => route('qrcode',$this->code)
             ],
         ];
     }
