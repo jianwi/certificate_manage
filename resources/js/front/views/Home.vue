@@ -20,6 +20,9 @@
                 <pagination></pagination>
             </div>
         </div>
+        <div class="text-center bg-dark text-light mt-2 py-2">
+            Designed By <a href="http://jialidun.vip">Jianwi</a>  2020
+        </div>
 
     </div>
 </template>
