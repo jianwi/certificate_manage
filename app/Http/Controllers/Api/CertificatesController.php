@@ -22,7 +22,7 @@ class CertificatesController extends Controller
         $per_page = $request->per_page;
         $certificates = QueryBuilder::for(Certificate::class)
             ->with(['activity', 'award'])
-            ->allowedFilters(['name', 'activity.name', 'award.id', AllowedFilter::exact('code')])
+            ->allowedFilters(['name', 'activity.name', AllowedFilter::exact('award.id'), AllowedFilter::exact('code')])
             ->defaultSort('-created_at')
             ->paginate($per_page);
 
