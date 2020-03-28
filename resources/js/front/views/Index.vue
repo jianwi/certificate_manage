@@ -27,7 +27,7 @@
         max-width: 600px;
         height: 70%;
         margin: auto;
-        background: #ffffff99;
+        background: rgba(255, 255, 255, 0.6);
         box-shadow: inset 1px 1px 20px 0px #fff7ea;
         padding: 50px 20px 10% 35px;
     }
