@@ -2,11 +2,9 @@
 
 ### 项目描述
 
-用于机构（教育机构）管理各种活动颁发证书。
+用于机构（教育机构）管理各种活动颁发的证书。
 
-其发自 [易班证书查询系统](http://www.yiban.cn/Renzheng/showJzList#/) 
-
-基于 laravel7 + laravel-admin + vue + elementui 构建
+启发自 [易班证书查询系统](http://www.yiban.cn/Renzheng/showJzList#/) 
 
 后台使用 laravel-admin 构建
 
