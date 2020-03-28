@@ -2,7 +2,7 @@
 
 $factory->define(\App\Models\Award::class, function (Faker\Generator $faker) {
     $activity_ids = \App\Models\Activity::all()->pluck('id')->toArray();
-    $items = ['一等奖','二等奖','三等奖','安慰奖','亚军','冠军','特等奖'];
+    $items = ['一等奖','二等奖','三等奖','安慰奖','亚军','冠军','特等奖','年度最佳演员','送人头总冠军','投降第一人'];
     return [
         'name' => $faker->randomElement($items),
         'content' => $faker->sentence(),

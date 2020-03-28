@@ -3,7 +3,7 @@
 $factory->define(\App\Models\Activity::class,function (Faker\Generator $faker){
     $template_ids = \App\Models\Template::all()->pluck('id')->toArray();
     $user_ids = \App\Models\User::all()->pluck('id')->toArray();
-    $activity_names = ['校园文化节', '寝室文化节', '最佳宿舍评选', '王者荣耀最佳演员', '最可爱的人'];
+    $activity_names = ['校园文化节', '寝室文化节', '最佳宿舍评选', '寻找王者荣耀年度最坑队友','寻找最可爱的人'];
 
     return [
         'name' => '第'.$faker->randomNumber(4).'届'.$faker->randomElement($activity_names),
