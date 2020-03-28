@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="container" id="content">
+        <div class="container position-relative" id="content">
             <nav class="navbar fixed-top navbar-expand bg-light border border-bottom text-dark">
                 <div class="container">
                     <div class="navbar-brand">证书管理系统</div>
@@ -10,7 +10,7 @@
                 </div>
 
             </nav>
-            <div class="py-3">
+            <div class="py-3 mb-0 pb-5">
                 <br>
                 <p class="mt-5"></p>
                 <recommend></recommend>
@@ -20,10 +20,6 @@
                 <pagination></pagination>
             </div>
         </div>
-        <div class="text-center bg-dark text-light mt-2 py-2">
-            Designed By <a href="http://jialidun.vip">Jianwi</a>  2020
-        </div>
-
     </div>
 </template>
 
@@ -46,5 +42,8 @@
 </script>
 
 <style scoped>
-
+.footer{
+    position: absolute;
+    bottom: 0px;
+}
 </style>
