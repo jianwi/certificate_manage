@@ -58,7 +58,7 @@
         },
         methods:{
             handleRowClick(event){
-                console.log(event)
+                // console.log(event)
                 window.x = event
                 this.$router.push('/info/' + event.code)
             }

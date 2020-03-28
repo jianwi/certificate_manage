@@ -14,7 +14,8 @@ const store = new Vuex.Store({
     },
     mutations: {
         SetPageSize(state, {page_size}) {
-            console.log('设置page_size:' + page_size)
+
+            // console.log('设置page_size:' + page_size)
             state.page_size = page_size
         },
         SetCertificates(state, {certificates}) {

@@ -1,5 +1,5 @@
 <template>
-    <div v-html="certificate">
+    <div class="mt-3" v-html="certificate">
 
     </div>
 </template>
@@ -14,17 +14,17 @@
         },
         mounted() {
             this.$http.get(this.$url + '/certificates/' + this.$route.params.code,).then(res => {
-                console.log("返回的res是", res)
+                // console.log("返回的res是", res)
                 let template = res.data.data.template
                 let texts = res.data.data.text
-                console.log('texts 的值：', texts)
+                // console.log('texts 的值：', texts)
                 let origin_key = template.match(/\$\{[^}]+\}/g)
 
-                console.log("origin_key：" + origin_key)
+                // console.log("origin_key：" + origin_key)
                 for (let i of origin_key) {
                     let striped_key = i.replace(/[${}]/g, "")
                     template = template.replace(i, texts[striped_key])
-                    console.log("第" + i + "次：", template)
+                    // console.log("第" + i + "次：", template)
                 }
                 this.certificate = template
 
