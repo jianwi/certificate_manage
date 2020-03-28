@@ -9,9 +9,14 @@
     <title>证书管理系统</title>
 </head>
 <body>
-    <div id="app">
+<div id="app">
 
-    </div>
-    <script src="{{ mix('/js/main.js') }}"></script>
+</div>
+
+<script !src="">
+    const app_url = '{{ config('app.url') }}'
+    console.log(app_url)
+</script>
+<script src="{{ mix('/js/main.js') }}"></script>
 </body>
 </html>

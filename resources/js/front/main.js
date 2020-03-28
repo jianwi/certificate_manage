@@ -11,7 +11,7 @@ Vue.protop
 Vue.use(ElementUI)
 
 // 后端地址
-Vue.prototype.$url = 'http://certificate-manage.test/api/v1'
+Vue.prototype.$url = APP_URL + '/api/v1'
 
 // 对后端接口 使用全局注册
 Vue.prototype.$api = api;
