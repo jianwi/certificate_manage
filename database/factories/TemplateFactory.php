@@ -8,6 +8,7 @@ $factory->define(\App\Models\Template::class,function (Faker\Generator $faker){
 <div  style="
     position: relative;
     width: 500px;
+    max-width: 100%;
     height: 900px;
     margin:auto;
     background-image: url(\'/images/zs.png\');
