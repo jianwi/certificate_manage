@@ -52,11 +52,11 @@
         methods: {
             ActivityClickHandle(activity_id, activity_name) {
 
-                this.$store.commit('SetFilterKey', {
+                this.$store.commit('filter_key', {
                     filter_key: 'activity.name'
                 })
 
-                this.$store.commit('SetFilterValue', {
+                this.$store.commit('filter_value', {
                     'filter_value': activity_name
                 })
 
@@ -67,8 +67,8 @@
                 })
             },
             AwardClickHandle(award_id) {
-                this.$store.commit('SetFilterKey', {filter_key: 'award.id'})
-                this.$store.commit('SetFilterValue', {filter_value: award_id})
+                this.$store.commit('filter_key', {filter_key: 'award.id'})
+                this.$store.commit('filter_value', {filter_value: award_id})
 
                 this.$store.dispatch('Update', this)
             },

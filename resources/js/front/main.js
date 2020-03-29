@@ -6,6 +6,8 @@ import api from "./http/api";
 import http from "./http/http";
 
 import {
+    Container,
+    Header,
     Pagination,
     Input,
     Select,
@@ -16,11 +18,14 @@ import {
     Row,
     Col,
     Loading,
-    Card
+    Card,
+    Main,
+    PageHeader
 } from 'element-ui';
 
 import 'element-ui/lib/theme-chalk/index.css';
-
+Vue.use(PageHeader)
+Vue.use(Main)
 Vue.use(Pagination)
 Vue.use(Input)
 Vue.use(Select)
@@ -32,6 +37,8 @@ Vue.use(Row)
 Vue.use(Col)
 Vue.use(Loading)
 Vue.use(Card)
+Vue.use(Container)
+Vue.use(Header)
 
 // 后端地址
 Vue.prototype.$url = APP_URL + '/api/v1'

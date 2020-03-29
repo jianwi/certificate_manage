@@ -8,12 +8,9 @@ import Certificate from "../views/Certificate";
 Vue.use(VueRouter)
 
 const routes = [
+
     {
-        path: '',
-        component: Index
-    },
-    {
-        path: '/home',
+        path: '/',
         name: 'home',
         component: Home
     },

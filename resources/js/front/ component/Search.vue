@@ -1,13 +1,13 @@
 <template>
     <el-input v-model="filter_value"
               placeholder="请输入内容搜索"
-              class="input-with-select"
+              class="input-with-select big-input"
               @change="search"
     >
         <el-select v-model="filter_key"
                    slot="prepend"
                    class="el-select" placeholder="搜索类型"
-
+                   style="min-width:135px;text-center"
         >
             <el-option
                 v-for="item in filter_types"
@@ -58,7 +58,7 @@
                     return this.$store.state.filter_key
                 },
                 set: function (newValue) {
-                    return this.$store.commit('SetFilterKey', {filter_key: newValue})
+                    return this.$store.commit('filter_key', {filter_key: newValue})
                 }
             },
             filter_value: {
@@ -66,7 +66,7 @@
                     return this.$store.state.filter_value
                 },
                 set: function (newValue) {
-                    return this.$store.commit('SetFilterValue', {filter_value: newValue})
+                    return this.$store.commit('filter_value', {filter_value: newValue})
                 }
             }
         }
@@ -80,12 +80,5 @@
 </script>
 
 <style scoped>
-    .el-select {
-        width: fit-content;
-        min-width: 120px;
-    }
 
-    .input-with-select .el-input-group__prepend {
-        background-color: #fff;
-    }
 </style>

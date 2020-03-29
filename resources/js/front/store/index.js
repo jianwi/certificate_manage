@@ -13,25 +13,26 @@ const store = new Vuex.Store({
         filter_value: undefined,
     },
     mutations: {
-        SetPageSize(state, {page_size}) {
-
+        page_size(state, {page_size}) {
             // console.log('设置page_size:' + page_size)
             state.page_size = page_size
+            state.current_page = 1
         },
-        SetCertificates(state, {certificates}) {
+        certificates(state, {certificates}) {
             state.certificates = certificates
         },
-        SetCurrentPage(state, {current_page}) {
+        current_page(state, {current_page}) {
             state.current_page = current_page
         },
-        SetTotal(state, {total}) {
+        total(state, {total}) {
             state.total = total
         },
-        SetFilterKey(state,{ filter_key }){
+        filter_key(state,{ filter_key }){
             state.filter_key = filter_key
         },
-        SetFilterValue(state,{ filter_value }){
+        filter_value(state,{ filter_value }){
             state.filter_value = filter_value
+            state.current_page = 1
         },
         CancelFilterValue(state){
             state.filter_value = undefined
@@ -51,8 +52,8 @@ const store = new Vuex.Store({
             }
 
             app.$http.get(app.$url + '/certificates', params).then(res => {
-                commit('SetCertificates', {certificates: res.data.data})
-                commit('SetTotal', {total: res.data.meta.total})
+                commit('certificates', {certificates: res.data.data})
+                commit('total', {total: res.data.meta.total})
 
             })
         }

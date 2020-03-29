@@ -21,12 +21,12 @@
         ]),
         methods:{
             handleSizeChange(val){
-                this.$store.commit('SetPageSize',{ page_size:val })
+                this.$store.commit('page_size',{ page_size:val })
                 this.$store.dispatch('Update',this)
 
             },
             handleCurrentChange(val){
-                this.$store.commit('SetCurrentPage',{ current_page:val })
+                this.$store.commit('current_page',{ current_page:val })
                 this.$store.dispatch('Update',this)
             }
         }
