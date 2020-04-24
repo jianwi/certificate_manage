@@ -1,0 +1,1 @@
+<view><view class="cu-bar search-form"><view class="search-form round"><text class="cuIcon-search"></text><input type="text" value="" placeholder="请输入关键字"/></view><view class="action"><text>广州</text><text class="cuIcon-triangledownfill"></text></view></view></view>
