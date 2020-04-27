@@ -20,4 +20,5 @@ Route::group([
     $router->get('api/awards','Api\Awards@awards');
     $router->get('api/templates','Api\Templates@templates');
 
+    $router->get('/importcer','CertificatesController@importCertificates');
 });

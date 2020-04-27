@@ -22,22 +22,8 @@ if( $str == $signature && $echostr ){
     $postArr = file_get_contents("php://input");
 
 
-
-    //2.处理消息类型，并设置回复类型和内容
-    /*<xml>
-<ToUserName><![CDATA[toUser]]></ToUserName>
-<FromUserName><![CDATA[FromUser]]></FromUserName>
-<CreateTime>123456789</CreateTime>
-<MsgType><![CDATA[event]]></MsgType>
-<Event><![CDATA[subscribe]]></Event>
-</xml>*/
     $postObj = simplexml_load_string( $postArr );
-    //$postObj->ToUserName = '';
-    //$postObj->FromUserName = '';
-    //$postObj->CreateTime = '';
-    //$postObj->MsgType = '';
-    //$postObj->Event = '';
-    // gh_e79a177814ed
+
     //判断该数据包是否是订阅的回复消息
     if( strtolower( $postObj->MsgType) == 'text'){
         //如果是关注 subscribe 事件
@@ -61,16 +47,13 @@ if( $str == $signature && $echostr ){
             $info     = sprintf($template, $toUser, $fromUser, $time, $msgType, $content);
             echo $info;
 
-            /*<xml>
-            <ToUserName><![CDATA[toUser]]></ToUserName>
-            <FromUserName><![CDATA[fromUser]]></FromUserName>
-            <CreateTime>12345678</CreateTime>
-            <MsgType><![CDATA[text]]></MsgType>
-            <Content><![CDATA[你好]]></Content>
-            </xml>*/
-
 
         }
     }
+}
 
+
+function getCertificate($name)
+{
+    $res = file_get_contents("");
 }

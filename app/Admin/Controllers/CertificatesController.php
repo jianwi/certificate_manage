@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Admin\Forms\ImportCertificate;
 use App\Models\Activity;
 use App\Models\Award;
 use App\Models\Certificate;
@@ -9,6 +10,7 @@ use App\Models\User;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
+use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 
 class CertificatesController extends AdminController
@@ -133,5 +135,12 @@ class CertificatesController extends AdminController
         $form->text('text8', __('Text8'));
 
         return $form;
+    }
+
+    public function importCertificates(Content $content)
+    {
+        return $content
+            ->title('导入证书')
+            ->body(new ImportCertificate());
     }
 }
