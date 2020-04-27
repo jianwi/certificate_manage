@@ -2,8 +2,11 @@
 
 namespace App\Admin\Forms;
 
+use App\Imports\CertificatesImport;
+use App\Models\Certificate;
 use Encore\Admin\Widgets\Form;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ImportCertificate extends Form
 {
@@ -23,10 +26,9 @@ class ImportCertificate extends Form
      */
     public function handle(Request $request)
     {
-        //dump($request->all());
-        $file = $request->file();
-        fgetcsv()
-
+        $activity = $request->post('activity_id');
+        $file = $request->file('zs_file')->getPathname();
+        Excel::import(new CertificatesImport($activity), $file);
     }
 
     /**
@@ -39,7 +41,7 @@ class ImportCertificate extends Form
         })
             ->load('award_id', '/admin/api/awards')
             ->required();
-        $this->file('证书文件');
+        $this->file('zs_file','证书文件');
     }
 
     /**

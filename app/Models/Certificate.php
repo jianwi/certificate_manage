@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\BaseModel as Model;
+use phpDocumentor\Reflection\Types\Self_;
 
 class Certificate extends Model
 {
@@ -24,6 +25,15 @@ class Certificate extends Model
     public function creator()
     {
         return $this->belongsTo(User::class);
+    }
+
+    static function createCode()
+    {
+        $code = \Illuminate\Support\Str::upper(substr(md5(time()), 1, 8));
+        if (self::where(['code'=>$code])->first()){
+            return self::createCode();
+        };
+        return $code;
     }
 
 }
