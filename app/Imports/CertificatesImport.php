@@ -13,6 +13,9 @@ class CertificatesImport implements ToCollection
     private $activity_id;
     private $awards = [];
     private $awards_info = [];
+    private $inserts = [];
+    private $codes = [];
+
     public function __construct($id)
     {
        $this->activity_id = $id;
@@ -28,10 +31,11 @@ class CertificatesImport implements ToCollection
 //        删除表头
         unset($collection[0]);
 
-
         foreach ($collection as $row){
             $this->newCertificate($row);
         }
+
+        \App\Models\Certificate::insert($this->inserts);
 
     }
 
@@ -39,6 +43,12 @@ class CertificatesImport implements ToCollection
     {
         $name = $row[1];
         $award = $row[2];
+        $code  = \App\Models\Certificate::createCode();
+
+        while (in_array($code,$this->codes)){
+            $code  = \App\Models\Certificate::createCode();
+        }
+        $this->codes[] = $code;
 
         if (!in_array($award,$this->awards)){
             $this->awards[] = $award;
@@ -54,7 +64,7 @@ class CertificatesImport implements ToCollection
             $award_id = $this->awards_detail[$award];
         }
 
-        \App\Models\Certificate::create([
+        $this->inserts[] =[
             'code' => \App\Models\Certificate::createCode(),
             'name' => $name,
             'activity_id' => $this->activity_id,
@@ -62,6 +72,6 @@ class CertificatesImport implements ToCollection
             'award_id' => $award_id,
             'text1' => $name,
             'text2' => $award
-        ]);
+        ];
     }
 }
