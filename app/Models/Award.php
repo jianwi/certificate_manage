@@ -7,7 +7,7 @@ use App\Models\BaseModel as Model;
 class Award extends Model
 {
     //
-    protected $fillable = ['name', 'content'];
+    protected $fillable = ['name', 'content','activity_id'];
     protected $hidden = ['isDelete'];
 
     public function activity()

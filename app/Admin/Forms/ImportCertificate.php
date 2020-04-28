@@ -3,6 +3,7 @@
 namespace App\Admin\Forms;
 
 use App\Imports\CertificatesImport;
+use App\Jobs\ProcessImport;
 use App\Models\Certificate;
 use Encore\Admin\Widgets\Form;
 use Illuminate\Http\Request;
@@ -28,7 +29,9 @@ class ImportCertificate extends Form
     {
         $activity = $request->post('activity_id');
         $file = $request->file('zs_file')->getPathname();
-        Excel::import(new CertificatesImport($activity), $file);
+        dispatch(new ProcessImport($file,$activity));
+        admin_success('已经成功导入');
+       return back();
     }
 
     /**

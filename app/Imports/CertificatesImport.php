@@ -4,6 +4,7 @@ namespace App\Imports;
 
 use App\Certificate;
 use App\Models\Award;
+use Encore\Admin\Admin;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Ramsey\Collection\Collection;
 
@@ -29,13 +30,9 @@ class CertificatesImport implements ToCollection
 
 
         foreach ($collection as $row){
-
-
-
+            $this->newCertificate($row);
         }
 
-        dump($this->activity_id);
-        dump($collection);
     }
 
     private function newCertificate($row)
@@ -44,9 +41,10 @@ class CertificatesImport implements ToCollection
         $award = $row[2];
 
         if (!in_array($award,$this->awards)){
-            $awards[] = $award;
+            $this->awards[] = $award;
+
             $add = Award::create([
-                'activity' => $this->activity_id,
+                'activity_id' => $this->activity_id,
                 'name' => $award,
                 'content' => $award
             ]);
@@ -59,7 +57,9 @@ class CertificatesImport implements ToCollection
         \App\Models\Certificate::create([
             'code' => \App\Models\Certificate::createCode(),
             'name' => $name,
-            'award' => $award_id,
+            'activity_id' => $this->activity_id,
+            'creator' => \Encore\Admin\Facades\Admin::user()->id,
+            'award_id' => $award_id,
             'text1' => $name,
             'text2' => $award
         ]);
