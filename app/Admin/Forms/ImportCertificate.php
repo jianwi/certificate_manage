@@ -36,7 +36,7 @@ class ImportCertificate extends Form
 
 
         $user_id  = \Encore\Admin\Facades\Admin::user()->id;
-        ProcessImport::dispatch(public_path('uploads').'/'.$file,$activity,$user_id)->onConnection('sync');
+        ProcessImport::dispatch(public_path('uploads').'/'.$file,$activity,$user_id);
         admin_success('已将导入任务添加至消息队列');
         return back();
     }
