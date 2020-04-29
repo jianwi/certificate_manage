@@ -42,8 +42,8 @@ class CertificatesImport implements ToCollection
 
     private function newCertificate($row)
     {
-        $name = $row[1];
-        $award = $row[2];
+        $name = $row[0];
+        $award = $row[1];
         $code  = \App\Models\Certificate::createCode();
 
         while (in_array($code,$this->codes)){
