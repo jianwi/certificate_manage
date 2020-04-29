@@ -49,7 +49,7 @@ class CertificatesController extends AdminController
         $grid->column('name', __('获奖者'))->limit(15);
         $grid->column('code', __('证书代码'));
 //        $grid->column('creator','创建者');
-        $grid->column('activity.name', __('活动名称'));
+        $grid->column('activity.name', __('活动名称'))->filter('like');
         $grid->column('award.name', __('奖品名称'));
         $grid->column('created_at', __('Created at'))->date('Y-m-d H:i:s');
 
