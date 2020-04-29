@@ -29,7 +29,7 @@ class Certificate extends Model
 
     static function createCode()
     {
-        $code = \Illuminate\Support\Str::upper(substr(md5(time()), 1, 8));
+        $code = \Illuminate\Support\Str::upper(substr(md5(time()), 1, 10));
         if (self::where(['code'=>$code])->first()){
             return self::createCode();
         };

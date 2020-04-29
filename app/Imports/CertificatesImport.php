@@ -12,7 +12,6 @@ class CertificatesImport implements ToCollection
 {
     private $activity_id;
     private $user_id;
-    private $awards = [];
     private $awards_info = [];
     private $inserts = [];
     private $codes = [];
@@ -50,9 +49,12 @@ class CertificatesImport implements ToCollection
             $code  = \App\Models\Certificate::createCode();
         }
         $this->codes[] = $code;
+        $hasThisAward = Award::where([
+            'activity_id' => $this->activity_id,
+            'name' => $award
+        ])->first();
 
-        if (!in_array($award,$this->awards)){
-            $this->awards[] = $award;
+        if (!$hasThisAward){
 
             $add = Award::create([
                 'activity_id' => $this->activity_id,
