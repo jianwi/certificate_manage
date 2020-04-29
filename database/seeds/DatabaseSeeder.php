@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(CertificatesSeeder::class);
         $this->call(AdminMenuTableSeeder::class);
-        $this->call(AwardsTableSeeder::class);
         $this->call(ActivitiesTableSeeder::class);
+        $this->call(AwardsTableSeeder::class);
     }
 }
