@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-3" v-html="certificate">
+    <div ref="cer_container" class="mt-3" v-html="certificate">
 
     </div>
 </template>
@@ -27,12 +27,26 @@
                     // console.log("第" + i + "次：", template)
                 }
                 this.certificate = template
+                setTimeout(()=>{
+                    let cer = document.getElementById('cer')
+                    let container = this.$refs.cer_container
+                    let container_w = container.clientWidth
+                    let cer_w = cer.clientWidth
+                    console.log(cer_w)
+                    if(container_w < cer_w){
+                        let scale = Math.floor((container_w / cer_w)*100)/100
+                        cer.style.transform = 'scale('+scale+')'
+                    }
+                },100);
 
             })
         }
     }
 </script>
-
 <style scoped>
-
+    @font-face {
+        font-family: 'award';
+        src: url('/fonts/certificate/华文行楷.ttf');
+        font-style: normal;
+    }
 </style>

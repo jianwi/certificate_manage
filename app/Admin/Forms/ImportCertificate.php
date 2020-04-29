@@ -28,10 +28,11 @@ class ImportCertificate extends Form
     public function handle(Request $request)
     {
         $activity = $request->post('activity_id');
-//        $file = $request->file('zs_file')->store('importCertificates','uploads');
-        $file = $request->file('zs_file')->getPathname();
-//        ProcessImport::dispatch(public_path('uploads').'/'.$file,$activity);
-        ProcessImport::dispatch($file,$activity)->onConnection('redis');
+//        $file = $request->file('zs_file')->getPathname();
+//        ProcessImport::dispatch($file,$activity);
+
+        $file = $request->file('zs_file')->store('importCertificates','uploads');
+        ProcessImport::dispatch(public_path('uploads').'/'.$file,$activity);
         admin_success('已经成功添加至后台任务');
         return back();
     }
