@@ -42,8 +42,9 @@ class CertificatesImport implements ToCollection
 
     private function newCertificate($row)
     {
-        $name = $row[0];
-        $award = $row[1];
+        $school = $row[0];
+        $name = $row[1];
+        $award = $row[2];
         $code  = \App\Models\Certificate::createCode();
 
         while (in_array($code,$this->codes)){
@@ -71,11 +72,11 @@ class CertificatesImport implements ToCollection
         }
         $this->inserts[] =[
             'code' => \App\Models\Certificate::createCode(),
-            'name' => $name,
+            'name' => $school.' '.$name,
             'activity_id' => $this->activity_id,
             'creator' => $this->user_id,
             'award_id' => $award_id,
-            'text1' => $name,
+            'text1' => $school.' '.$name,
             'text2' => $award
         ];
     }
