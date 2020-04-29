@@ -79,11 +79,14 @@ class TemplatesController extends AdminController
         $form->css('content', __('Content'));
 
         $form->image('image','证书缩略图')->uniqueName();
+        $form->display('user_id', '创建者')->with(function ($value) {
+            return \Encore\Admin\Facades\Admin::user()->name;
+        });
 
         // 表单提交后,保存前事件
-        $form->submitted(function (Form $form){
+        $form->submitted(function (Form $form) {
             $form->user_id = \Encore\Admin\Facades\Admin::user()->id;
-//            $form->content = base64_encode($form->content);
+
         });
 
         return $form;

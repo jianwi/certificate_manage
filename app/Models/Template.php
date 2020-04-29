@@ -6,6 +6,7 @@ use App\Models\BaseModel as Model;
 
 class Template extends Model
 {
+    protected $fillable = ['user_id'];
     protected $hidden = ['isDelete'];
 
     //
