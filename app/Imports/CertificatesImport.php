@@ -11,15 +11,16 @@ use Ramsey\Collection\Collection;
 class CertificatesImport implements ToCollection
 {
     private $activity_id;
+    private $user_id;
     private $awards = [];
     private $awards_info = [];
     private $inserts = [];
     private $codes = [];
 
-    public function __construct($id)
+    public function __construct($activity_id,$user_id)
     {
-       $this->activity_id = $id;
-
+       $this->activity_id = $activity_id;
+        $this->user_id = $user_id;
     }
 
     /**
@@ -63,12 +64,11 @@ class CertificatesImport implements ToCollection
         }else{
             $award_id = $this->awards_detail[$award];
         }
-
         $this->inserts[] =[
             'code' => \App\Models\Certificate::createCode(),
             'name' => $name,
             'activity_id' => $this->activity_id,
-            'creator' => \Encore\Admin\Facades\Admin::user()->id,
+            'creator' => $this->user_id,
             'award_id' => $award_id,
             'text1' => $name,
             'text2' => $award

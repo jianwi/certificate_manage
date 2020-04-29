@@ -21,11 +21,12 @@ class ProcessImport implements ShouldQueue
      */
     private $file_path;
     private $activity_id;
-
-    public function __construct($file_path,$activity_id)
+    private $user_id;
+    public function __construct($file_path,$activity_id,$user_id)
     {
         //
         $this->activity_id = $activity_id;
+        $this->user_id = $user_id;
         $this->file_path = $file_path;
     }
 
@@ -37,7 +38,7 @@ class ProcessImport implements ShouldQueue
     public function handle()
     {
         //
-        Excel::import(new CertificatesImport($this->activity_id), $this->file_path);
+        Excel::import(new CertificatesImport($this->activity_id,$this->user_id), $this->file_path);
 
     }
 }

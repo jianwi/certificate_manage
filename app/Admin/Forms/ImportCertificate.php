@@ -5,6 +5,7 @@ namespace App\Admin\Forms;
 use App\Imports\CertificatesImport;
 use App\Jobs\ProcessImport;
 use App\Models\Certificate;
+use Encore\Admin\Admin;
 use Encore\Admin\Widgets\Form;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -32,8 +33,11 @@ class ImportCertificate extends Form
 //        ProcessImport::dispatch($file,$activity);
 
         $file = $request->file('zs_file')->store('importCertificates','uploads');
-        ProcessImport::dispatch(public_path('uploads').'/'.$file,$activity);
-        admin_success('已经成功添加至后台任务');
+
+
+        $user_id  = \Encore\Admin\Facades\Admin::user()->id;
+        ProcessImport::dispatch(public_path('uploads').'/'.$file,$activity,$user_id)->onConnection('database');
+        admin_success('已将导入任务添加至消息队列');
         return back();
     }
 
