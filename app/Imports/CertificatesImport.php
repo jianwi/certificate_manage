@@ -33,6 +33,7 @@ class CertificatesImport implements ToCollection
 
         foreach ($collection as $row){
             $this->newCertificate($row);
+
         }
 
         \App\Models\Certificate::insert($this->inserts);
@@ -53,7 +54,7 @@ class CertificatesImport implements ToCollection
             'activity_id' => $this->activity_id,
             'name' => $award
         ])->first();
-
+        dump($hasThisAward);
         if (!$hasThisAward){
 
             $add = Award::create([

@@ -18,3 +18,5 @@ Route::get('/', function () {
 });
 
 Route::get('/wx',"weixin//Message@index");
+
+
