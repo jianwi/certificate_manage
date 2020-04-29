@@ -54,18 +54,20 @@ class CertificatesImport implements ToCollection
             'activity_id' => $this->activity_id,
             'name' => $award
         ])->first();
-        dump($hasThisAward);
         if (!$hasThisAward){
-
             $add = Award::create([
                 'activity_id' => $this->activity_id,
                 'name' => $award,
                 'content' => $award
             ]);
-            $this->awards_detail[$award] = $add['id'];
+            $this->awards_info[$award] = $add['id'];
             $award_id = $add['id'];
         }else{
-            $award_id = $this->awards_detail[$award];
+            if (key_exists($award,$this->awards_info)){
+                $award_id = $this->awards_info[$award];
+            }else{
+                $award_id = $hasThisAward->id;
+            }
         }
         $this->inserts[] =[
             'code' => \App\Models\Certificate::createCode(),
