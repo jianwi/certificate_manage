@@ -17,13 +17,5 @@ Route::get('/', function () {
     return view('app');
 });
 
-Route::get('/wx',"weixin//Message@index");
-
-Route::get('/t',function (){
-   $a = \App\Models\Award::where([
-       'name' => '三等奖'
-   ])->first();
-
-   dump($a->id);
-});
+Route::any('/wx','weixin\Message@index');
 
