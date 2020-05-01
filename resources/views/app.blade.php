@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
     <title>证书管理系统</title>
-    <meta http-equiv="pragma" content="Pragma">
-    <meta http-equiv="cache-control" content="public">
-    <meta http-equiv="Age" content="100">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 </head>
 <body class="position-relative">
 <div id="app">

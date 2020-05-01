@@ -17,5 +17,7 @@ Route::get('/', function () {
     return view('app');
 });
 
-Route::any('/wx','weixin\Message@index');
+Route::view('/wxsearch','weixin');
+
+Route::any('/wx','weixin/Message@index');
 
