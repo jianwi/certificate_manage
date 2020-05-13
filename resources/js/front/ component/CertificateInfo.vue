@@ -3,14 +3,27 @@
         <div ref="cer_container" class="mt-3" v-html="certificate">
 
         </div>
-        <div class="text-center" checked="my-5" style="margin-bottom: 50px" v-show="!isPrint">
-            <button class="btn btn-success" @click="print">一键打印</button>
+        <div class="w-75 m-auto" checked="my-5" style="margin-bottom: 50px" v-show="!isPrint">
+            <div class="alert alert-primary text-left">
+                微信不支持打印<br>
+                手机端可以用谷歌浏览器打开此网页打印。（可打印为pdf）<br>
+                电脑端可以用自带的 edge 浏览器打印
+                <br>
+                <div class="text-center p-2">
+                    <button class="btn btn-success">转为图片</button>
+                    <button class="btn btn-success" @click="print">打印</button>
+                    <button class="btn btn-success" @click="saveToPng">保存为图片</button>
+                </div>
+
+            </div>
         </div>
+
     </div>
 
 </template>
 
 <script>
+    import domtoimage from 'dom-to-image'
     export default {
         name: "CertificateInfo",
         data() {
@@ -25,8 +38,18 @@
               setTimeout(()=>{
                   window.print()
               },300)
+          },
+          saveToPng(){
+              var node = this.$refs.cer_container
+              domtoimage.toJpeg(node, { quality: 1 })
+                  .then(function (dataUrl) {
+                      var link = document.createElement('a');
+                      link.download = 'my-image-name.jpeg';
+                      link.href = dataUrl;
+                      link.click();
+                  });
+            },
 
-          }
         },
         mounted() {
             this.$http.get(this.$url + '/certificates/' + this.$route.params.code,).then(res => {

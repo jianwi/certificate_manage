@@ -74,7 +74,7 @@ class CertificatesImport implements ToCollection
             'code' => \App\Models\Certificate::createCode(),
             'name' => $school.' '.$name,
             'activity_id' => $this->activity_id,
-            'creator' => $this->user_id,
+            'user_id' => $this->user_id,
             'award_id' => $award_id,
             'text1' => $school.' '.$name,
             'text2' => $award

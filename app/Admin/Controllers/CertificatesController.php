@@ -111,9 +111,10 @@ class CertificatesController extends AdminController
         $form->disableViewCheck();
         $form->disableEditingCheck();
 
-        $form->text('code', __('证书代码'))
-            ->rules(['required', "unique:certificates"])
-            ->value(\Illuminate\Support\Str::upper(substr(md5(time()), 1, 8)));
+        $form->hidden('code');
+        $form->hidden('user_id');
+
+
 
         $form->select('activity_id', __('活动'))->options(function () {
             return \DB::table('activities')->pluck('name', 'id');
@@ -122,6 +123,7 @@ class CertificatesController extends AdminController
             ->required();
 
         $form->select('award_id', __('奖项'));
+
 
         $form->text('name', __('Name'))
             ->rules(['required', "unique:certificates"]);
@@ -134,6 +136,10 @@ class CertificatesController extends AdminController
         $form->text('text7', __('Text7'));
         $form->text('text8', __('Text8'));
 
+        $form->saving(function (Form $form) {
+            $form->code = Certificate::createCode();
+            $form->user_id = \Encore\Admin\Facades\Admin::user()->id;
+        });
         return $form;
     }
 
