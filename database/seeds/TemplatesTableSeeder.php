@@ -52,13 +52,26 @@ width:100%;
 text-align:center;
 \'>${text2}</h4>
 
-
+<div 
+style="position: absolute;
+top: 800px;
+text-align: center; 
+left: 200px;"
+>
+<img width="120px" src="${qr_code}" id="qr_img" />
+<p
+style="
+font-size: 14px;
+font-weight: 600;
+margin-top: 4px;
+"
+>证书编码:${code}</p>
 </div>
 </div>',
                 'image' => 'images/86b714db22034f8d23fe5833a5979258.png',
                 'user_id' => 1,
                 'created_at' => '2019-01-04 05:34:43',
-                'updated_at' => '2020-04-29 23:19:39',
+                'updated_at' => '2020-05-13 22:30:56',
                 0 => NULL,
             ),
             1 => 

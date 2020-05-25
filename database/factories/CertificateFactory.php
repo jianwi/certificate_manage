@@ -29,7 +29,7 @@ $factory->define(\App\Models\Certificate::class, function (Faker\Generator $fake
         'text1' => $name,
         'text2' => $activity_name,
         'text3' => $award_name,
-        'creator' => $faker->randomElement($user_ids),
+        'user_id' => $faker->randomElement($user_ids),
         'created_at' => $faker->date . ' ' . $faker->time,
         'updated_at' => $faker->date . ' ' . $faker->time,
     ];
