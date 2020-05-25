@@ -10,7 +10,7 @@
                 电脑端可以用自带的 edge 浏览器打印
                 <br>
                 <div class="text-center p-2">
-                    <button class="btn btn-success">转为图片</button>
+<!--                    <button class="btn btn-success">转为图片</button>-->
                     <button class="btn btn-success" @click="print">打印</button>
                     <button class="btn btn-success" @click="saveToPng">保存为图片</button>
                 </div>
@@ -58,14 +58,18 @@
                 let texts = res.data.data.text
                 // console.log('texts 的值：', texts)
                 let origin_key = template.match(/\$\{[^}]+\}/g)
-
-                // console.log("origin_key：" + origin_key)
-                for (let i of origin_key) {
-                    let striped_key = i.replace(/[${}]/g, "")
-                    template = template.replace(i, texts[striped_key])
-                    // console.log("第" + i + "次：", template)
+                if (origin_key){
+                    // console.log("origin_key：" + origin_key)
+                    for (let i of origin_key) {
+                        let striped_key = i.replace(/[${}]/g, "")
+                        template = template.replace(i, texts[striped_key])
+                        // console.log("第" + i + "次：", template)
+                    }
+                    this.certificate = template
+                }else {
+                    this.certificate = template
                 }
-                this.certificate = template
+
                 // setTimeout(()=>{
                 //     let cer = document.getElementById('cer')
                 //     let container = this.$refs.cer_container

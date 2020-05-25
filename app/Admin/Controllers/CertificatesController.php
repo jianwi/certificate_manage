@@ -126,7 +126,13 @@ class CertificatesController extends AdminController
 
 
         $form->text('name', __('Name'))
-            ->rules(['required', "unique:certificates"]);
+            ->rules(['required']);
+
+        $form->select("type","类型")->options([
+            1=>"使用活动模板",
+            2=>"自制模板"
+        ]);
+        $form->textarea('template',"自制模板内容(选填)");
         $form->text('text1', __('Text1'));
         $form->text('text2', __('Text2'));
         $form->text('text3', __('Text3'));

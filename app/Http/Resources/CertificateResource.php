@@ -14,10 +14,15 @@ class CertificateResource extends JsonResource
      */
     public function toArray($request)
     {
+        if ($this->type == 2){
+            $template = $this->template;
+        }else{
+            $template = $this->activity->template->content;
+        }
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'template' => $this->activity->template->content,
+            'template' => $template,
             'award' => $this->award->name,
             'code' => $this->code,
             'text' => [
